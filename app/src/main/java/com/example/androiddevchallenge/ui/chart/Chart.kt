@@ -2,6 +2,7 @@ package com.example.androiddevchallenge.ui.chart
 
 import android.graphics.Point
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,12 +17,12 @@ import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 
 @Composable
 fun Chart(modifier: Modifier = Modifier) {
-    Canvas(modifier = modifier.fillMaxSize()) {
+    Canvas(modifier = modifier.fillMaxSize().background(color = Color.Gray)) {
         val canvasWidth = size.width
         val canvasHeight = size.height
 
 
-        val list = getPoints(size)
+        val list = getPoints(size.copy(height = size.height/2))
 
 
         val path = Path().apply {
@@ -60,8 +61,8 @@ fun getPoints(size: Size): List<Offset> {
 
     return listOf(
         Offset(wUnit, hUnit * 2),
-        Offset(wUnit * 2, hUnit * 2),
+        Offset(wUnit * 2, hUnit ),
         Offset(wUnit * 3, hUnit * 3),
-        Offset(wUnit * 4, hUnit * 5),
+        Offset(wUnit * 4, hUnit * 4),
         )
 }
