@@ -87,6 +87,95 @@ private fun drawChart(
     val maxValue = list.maxOf { it.offset.y }
     val diff = maxValue - minValue
     val yUnit = height / diff
+
+    drawChartLine(canvas, list, xUnit, yUnit, minValue, height, lineColor)
+    drawCircleAndText(
+        canvas,
+        list,
+        circleColor,
+        textColor,
+        xUnit,
+        yUnit,
+        minValue,
+        height,
+        textOnLineHeight,
+        textSize,
+        drawScope
+    )
+}
+
+private fun drawCircleAndText(
+    canvas: Canvas,
+    list: List<ChartData>,
+    circleColor: Color,
+    textColor: Color,
+    xUnit: Float,
+    yUnit: Float,
+    minValue: Float,
+    height: Float,
+    textOnLineHeight: Float,
+    textSize: TextUnit,
+    drawScope: DrawScope
+) {
+    val circlePaint = Paint().apply {
+        this.color = circleColor
+        this.style = PaintingStyle.Fill
+    }
+    val textPaint = textPaint(textColor)
+    list.forEach { chartData ->
+        val (offsetX, screenOffsetY) = newOffset(chartData, xUnit, yUnit, minValue, height)
+        drawTextPoint(
+            canvas,
+            chartData,
+            offsetX,
+            screenOffsetY,
+            textOnLineHeight,
+            textPaint,
+            textSize,
+            drawScope
+        )
+
+        drawCirclePoint(canvas, offsetX, screenOffsetY, circlePaint)
+    }
+}
+
+private fun drawCirclePoint(
+    canvas: Canvas,
+    offsetX: Float,
+    screenOffsetY: Float,
+    circlePaint: Paint
+) {
+    canvas.drawCircle(Offset(offsetX, screenOffsetY), radius = 10f, circlePaint)
+}
+
+private fun drawTextPoint(
+    canvas: Canvas,
+    chartData: ChartData,
+    offsetX: Float,
+    screenOffsetY: Float,
+    textOnLineHeight: Float,
+    textPaint: android.graphics.Paint,
+    textSize: TextUnit,
+    drawScope: DrawScope
+) {
+    canvas.nativeCanvas.drawText(
+        chartData.textOnOffset,
+        offsetX,
+        screenOffsetY - textOnLineHeight,
+        paint(drawScope = drawScope, paint = textPaint, textUnit = textSize)
+    )
+}
+
+private fun drawChartLine(
+    canvas: Canvas,
+    list: List<ChartData>,
+    xUnit: Float,
+    yUnit: Float,
+    minValue: Float,
+    height: Float,
+    lineColor: Color
+) {
+    // chart
     val path = Path().apply {
         list.forEachIndexed { index, chartData ->
             val (offsetX, screenOffsetY) = newOffset(chartData, xUnit, yUnit, minValue, height)
@@ -106,22 +195,6 @@ private fun drawChart(
     canvas.drawPath(
         path, linePaint
     )
-    val circlePaint = Paint().apply {
-        this.color = circleColor
-        this.style = PaintingStyle.Fill
-    }
-    val textPaint = textPaint(textColor)
-    list.forEach { chartData ->
-        val (offsetX, screenOffsetY) = newOffset(chartData, xUnit, yUnit, minValue, height)
-        canvas.nativeCanvas.drawText(
-            chartData.textOnOffset,
-            offsetX,
-            screenOffsetY - textOnLineHeight,
-            paint(drawScope = drawScope, paint = textPaint, textUnit = textSize)
-        )
-
-        canvas.drawCircle(Offset(offsetX, screenOffsetY), radius = 10f, circlePaint)
-    }
 }
 
 /**
