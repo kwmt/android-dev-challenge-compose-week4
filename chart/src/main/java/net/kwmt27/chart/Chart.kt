@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import net.kwmt27.chart.model.ChartData
 import net.kwmt27.chart.util.paint
@@ -40,6 +41,7 @@ fun Chart(
     chartDataList: List<ChartData>,
     lineColor: Color = Color.Blue,
     circleColor: Color = Color.White,
+    distanceFromOffsetToText: Dp = 10.dp
 ) {
     Canvas(
         modifier = modifier
@@ -47,7 +49,15 @@ fun Chart(
             .background(color = Color.Gray)
     ) {
         drawIntoCanvas { canvas ->
-            drawChart(canvas, size, chartDataList, lineColor, circleColor, this, 10.dp.toPx())
+            drawChart(
+                canvas,
+                size,
+                chartDataList,
+                lineColor,
+                circleColor,
+                this,
+                distanceFromOffsetToText.toPx()
+            )
         }
     }
 }
