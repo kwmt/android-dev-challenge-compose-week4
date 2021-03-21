@@ -45,7 +45,7 @@ fun translateTemperatureByTimeToChartData(temperatures: List<Temperature>): List
     }.map { temperature ->
         ChartData(
             offset = Offset(x = temperature.time.hour.toFloat(), y = temperature.temperature),
-            textOnOffset = temperature.temperature.toString()
+            textOnOffset = temperature.temperature.toInt().toString()
         )
     }
 }
