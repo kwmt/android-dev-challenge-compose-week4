@@ -110,15 +110,14 @@ private fun drawChart(
         this.color = circleColor
         this.style = PaintingStyle.Fill
     }
-//    val textPaint = textPaint(textColor)
+    val textPaint = textPaint(textColor)
     list.forEach { chartData ->
         val (offsetX, screenOffsetY) = newOffset(chartData, xUnit, yUnit, minValue, height)
         canvas.nativeCanvas.drawText(
             chartData.textOnOffset,
             offsetX,
             screenOffsetY - textOnLineHeight,
-
-            paint(drawScope = drawScope, paint = textPaint(textColor), textSize)
+            paint(drawScope = drawScope, paint = textPaint, textUnit = textSize)
         )
 
         canvas.drawCircle(Offset(offsetX, screenOffsetY), radius = 10f, circlePaint)

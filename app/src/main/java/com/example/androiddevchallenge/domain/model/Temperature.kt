@@ -78,7 +78,7 @@ fun createData(): List<Temperature> {
         ),
         Temperature(
             time = LocalTime.of(12, 0),
-            temperature = 9f,
+            temperature = 3f,
         ),
         Temperature(
             time = LocalTime.of(13, 0),
@@ -86,7 +86,7 @@ fun createData(): List<Temperature> {
         ),
         Temperature(
             time = LocalTime.of(14, 0),
-            temperature = 12f,
+            temperature = 0f,
         ),
         Temperature(
             time = LocalTime.of(15, 0),
