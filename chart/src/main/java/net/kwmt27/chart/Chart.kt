@@ -31,9 +31,12 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import net.kwmt27.chart.model.ChartData
 import net.kwmt27.chart.util.paint
+import net.kwmt27.chart.util.textPaint
 
 @Composable
 fun Chart(
@@ -41,7 +44,9 @@ fun Chart(
     chartDataList: List<ChartData>,
     lineColor: Color = Color.Blue,
     circleColor: Color = Color.White,
-    distanceFromOffsetToText: Dp = 10.dp
+    distanceFromOffsetToText: Dp = 10.dp,
+    textColor: Color = Color.Black,
+    textSize: TextUnit = 18.sp,
 ) {
     Canvas(
         modifier = modifier
@@ -56,7 +61,9 @@ fun Chart(
                 lineColor,
                 circleColor,
                 this,
-                distanceFromOffsetToText.toPx()
+                distanceFromOffsetToText.toPx(),
+                textColor,
+                textSize,
             )
         }
     }
@@ -69,7 +76,9 @@ private fun drawChart(
     lineColor: Color,
     circleColor: Color,
     drawScope: DrawScope,
-    textOnLineHeight: Float
+    textOnLineHeight: Float,
+    textColor: Color,
+    textSize: TextUnit,
 ) {
     val width = size.width
     val height = size.height
@@ -86,7 +95,7 @@ private fun drawChart(
             } else {
                 lineTo(offsetX, screenOffsetY)
             }
-        }
+        } 
     }
     val linePaint = Paint().apply {
         this.color = lineColor
@@ -101,13 +110,15 @@ private fun drawChart(
         this.color = circleColor
         this.style = PaintingStyle.Fill
     }
+//    val textPaint = textPaint(textColor)
     list.forEach { chartData ->
         val (offsetX, screenOffsetY) = newOffset(chartData, xUnit, yUnit, minValue, height)
         canvas.nativeCanvas.drawText(
             chartData.textOnOffset,
             offsetX,
             screenOffsetY - textOnLineHeight,
-            paint(drawScope = drawScope)
+
+            paint(drawScope = drawScope, paint = textPaint(textColor), textSize)
         )
 
         canvas.drawCircle(Offset(offsetX, screenOffsetY), radius = 10f, circlePaint)
