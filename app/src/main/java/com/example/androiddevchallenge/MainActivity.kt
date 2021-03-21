@@ -71,7 +71,6 @@ fun MyApp() {
                 modifier = m
             ) {
                 Chart(
-                    modifier = m,
                     chartDataList = translateTemperatureByTimeToChartData(createData())
                 )
             }
