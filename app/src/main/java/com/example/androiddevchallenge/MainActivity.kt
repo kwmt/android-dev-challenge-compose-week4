@@ -19,15 +19,14 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
@@ -38,10 +37,11 @@ import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.androiddevchallenge.domain.model.createData
+import com.example.androiddevchallenge.domain.model.translateTemperatureByTimeToChartData
 import com.example.androiddevchallenge.ui.chart.Chart
 import com.example.androiddevchallenge.ui.theme.DevChallengeScaffold
 import com.example.androiddevchallenge.ui.theme.DevChallengeTheme
-import com.example.androiddevchallenge.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,11 +61,18 @@ fun MyApp() {
     DevChallengeScaffold {
         Column(
             modifier = Modifier
-                .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
+//                .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
                 .fillMaxWidth()
         ) {
             HomeTitle(text = "Browse themes", before = 32.dp)
-            Chart()
+
+            val m = Modifier.height(100.dp)
+            Box(
+                modifier = m
+            ) {
+                Chart(modifier = m,
+                    chartDataList = translateTemperatureByTimeToChartData(createData()))
+            }
         }
     }
 }
@@ -115,3 +122,5 @@ private fun HomeTitle(
         }
     }
 }
+
+
