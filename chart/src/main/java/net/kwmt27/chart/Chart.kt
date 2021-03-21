@@ -95,7 +95,7 @@ private fun drawChart(
             } else {
                 lineTo(offsetX, screenOffsetY)
             }
-        } 
+        }
     }
     val linePaint = Paint().apply {
         this.color = lineColor
