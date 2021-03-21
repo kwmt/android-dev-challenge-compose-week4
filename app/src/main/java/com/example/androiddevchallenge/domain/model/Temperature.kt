@@ -16,7 +16,7 @@
 package com.example.androiddevchallenge.domain.model
 
 import androidx.compose.ui.geometry.Offset
-import com.example.androiddevchallenge.ui.chart.model.ChartData
+import net.kwmt27.chart.model.ChartData
 import org.threeten.bp.LocalTime
 
 /**

@@ -39,9 +39,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.domain.model.createData
 import com.example.androiddevchallenge.domain.model.translateTemperatureByTimeToChartData
-import com.example.androiddevchallenge.ui.chart.Chart
 import com.example.androiddevchallenge.ui.theme.DevChallengeScaffold
 import com.example.androiddevchallenge.ui.theme.DevChallengeTheme
+import net.kwmt27.chart.Chart
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.chart
+package net.kwmt27.chart
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -31,8 +31,8 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.ui.chart.model.ChartData
-import com.example.androiddevchallenge.ui.utils.paint
+import net.kwmt27.chart.model.ChartData
+import net.kwmt27.chart.util.paint
 
 @Composable
 fun Chart(
