@@ -70,8 +70,10 @@ fun MyApp() {
             Box(
                 modifier = m
             ) {
-                Chart(modifier = m,
-                    chartDataList = translateTemperatureByTimeToChartData(createData()))
+                Chart(
+                    modifier = m,
+                    chartDataList = translateTemperatureByTimeToChartData(createData())
+                )
             }
         }
     }
@@ -122,5 +124,3 @@ private fun HomeTitle(
         }
     }
 }
-
-
