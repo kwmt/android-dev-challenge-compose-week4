@@ -71,7 +71,7 @@ fun MyApp() {
                 modifier = m
             ) {
                 Chart(
-                    chartDataList = translateTemperatureByTimeToChartData(createData()),
+                    list = translateTemperatureByTimeToChartData(createData()),
                     textColor = DevChallengeTheme.colors.textBody1,
                     circleColor = DevChallengeTheme.colors.surface,
                 )
