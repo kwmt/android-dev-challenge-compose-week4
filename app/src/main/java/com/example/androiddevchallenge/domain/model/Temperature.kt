@@ -16,8 +16,10 @@
 package com.example.androiddevchallenge.domain.model
 
 import androidx.compose.ui.geometry.Offset
-import com.example.androiddevchallenge.ui.chart.model.ChartData
+import com.example.androiddevchallenge.R
+import net.kwmt27.chart.model.ChartData
 import org.threeten.bp.LocalTime
+import org.threeten.bp.format.DateTimeFormatter
 
 /**
  * 時間とそのときの温度
@@ -28,9 +30,15 @@ data class Temperature(
      */
     val time: LocalTime,
     /**
+     * チャート用の時間
+     */
+    val chartTime: LocalTime = time,
+    /**
      * 温度
      */
     val temperature: Float,
+
+    val image: Int,
 )
 
 fun translateTemperatureByTimeToChartData(temperatures: List<Temperature>): List<ChartData> {
@@ -40,12 +48,15 @@ fun translateTemperatureByTimeToChartData(temperatures: List<Temperature>): List
     }
 
     return temperatures.map { temperature ->
-        val newTime = temperature.time.minusHours(min.hour.toLong())
-        temperature.copy(time = newTime)
+        val newTime = temperature.chartTime.minusHours(min.hour.toLong())
+        temperature.copy(chartTime = newTime)
     }.map { temperature ->
         ChartData(
-            offset = Offset(x = temperature.time.hour.toFloat(), y = temperature.temperature),
-            textOnOffset = temperature.temperature.toString()
+            offset = Offset(x = temperature.chartTime.hour.toFloat(), y = temperature.temperature),
+            textOnOffset = temperature.temperature.toInt().toString() + "°",
+            textOnXAxis = temperature.time.format(DateTimeFormatter.ofPattern("HH:mm")),
+            imageDrawable = temperature.image
+
         )
     }
 }
@@ -54,55 +65,68 @@ fun createData(): List<Temperature> {
     return listOf(
         Temperature(
             time = LocalTime.of(6, 0),
-            temperature = 5f,
+            temperature = 41f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(7, 0),
-            temperature = 5f,
+            temperature = 41f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(8, 0),
-            temperature = 6f,
+            temperature = 42.8f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(9, 0),
-            temperature = 6f,
+            temperature = 42.8f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(10, 0),
-            temperature = 7f,
+            temperature = 44.6f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(11, 0),
-            temperature = 8f,
+            temperature = 48.2f,
+            image = R.drawable.ic_sunny
         ),
         Temperature(
             time = LocalTime.of(12, 0),
-            temperature = 9f,
+            temperature = 48.2f,
+            image = R.drawable.ic_sunny
         ),
         Temperature(
             time = LocalTime.of(13, 0),
-            temperature = 10f,
+            temperature = 50f,
+            image = R.drawable.ic_sunny
         ),
         Temperature(
             time = LocalTime.of(14, 0),
-            temperature = 12f,
+            temperature = 51.8f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(15, 0),
-            temperature = 11f,
+            temperature = 51.8f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(16, 0),
-            temperature = 10f,
+            temperature = 50f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(17, 0),
-            temperature = 8f,
+            temperature = 50f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(18, 0),
-            temperature = 6f,
+            temperature = 42.8f,
+            image = R.drawable.ic_sun
         ),
     )
 }

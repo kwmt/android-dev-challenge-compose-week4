@@ -18,7 +18,6 @@ package com.example.androiddevchallenge.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -63,7 +62,7 @@ private val LightColorPalette = DevChallengeColors(
     onSurface = Gray,
     textButton1 = White,
     textButton2 = Pink900,
-    textH1 = Gray,
+    textH1 = White,
     textH2 = Gray,
     textSubtitle1 = Gray,
     textBody1 = Gray,
@@ -108,9 +107,10 @@ fun DevChallengeScaffold(
     content: @Composable() () -> Unit
 ) {
     MyTheme(darkTheme) {
-        Scaffold(backgroundColor = surfaceColor(), bottomBar = bottomBar) {
-            content()
-        }
+        content()
+        /*Scaffold(backgroundColor = surfaceColor(), bottomBar = bottomBar) {
+
+        }*/
     }
 }
 
@@ -124,7 +124,7 @@ fun MyTheme(darkTheme: Boolean, content: @Composable() () -> Unit) {
     val sysUiController = LocalSysUiController.current
     SideEffect {
         sysUiController.setSystemBarsColor(
-            color = colors.background // .copy(alpha = AlphaNearOpaque)
+            color = colors.background.copy(alpha = AlphaNearOpaque)
         )
     }
     ProvideDevChallengeColors(colors) {

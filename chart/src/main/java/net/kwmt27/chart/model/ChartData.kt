@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.androiddevchallenge.ui.chart.model
+package net.kwmt27.chart.model
 
+import androidx.annotation.DrawableRes
 import androidx.compose.ui.geometry.Offset
 
 data class ChartData(
@@ -26,6 +27,10 @@ data class ChartData(
      * x,y座標の上に書くテキスト
      */
     val textOnOffset: String = "",
+
+    val textOnXAxis: String = "",
+
+    @DrawableRes val imageDrawable: Int? = null,
 //    /**
 //     * 点を表す円のカラー
 //     */
