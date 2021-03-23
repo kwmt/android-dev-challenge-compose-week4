@@ -26,6 +26,8 @@ data class ChartData(
      * x,y座標の上に書くテキスト
      */
     val textOnOffset: String = "",
+
+    val textOnXAxis: String = "",
 //    /**
 //     * 点を表す円のカラー
 //     */

@@ -18,6 +18,7 @@ package com.example.androiddevchallenge.domain.model
 import androidx.compose.ui.geometry.Offset
 import net.kwmt27.chart.model.ChartData
 import org.threeten.bp.LocalTime
+import org.threeten.bp.format.DateTimeFormatter
 
 /**
  * 時間とそのときの温度
@@ -27,6 +28,10 @@ data class Temperature(
      * 時間
      */
     val time: LocalTime,
+    /**
+     * チャート用の時間
+     */
+    val chartTime: LocalTime = time,
     /**
      * 温度
      */
@@ -40,12 +45,13 @@ fun translateTemperatureByTimeToChartData(temperatures: List<Temperature>): List
     }
 
     return temperatures.map { temperature ->
-        val newTime = temperature.time.minusHours(min.hour.toLong())
-        temperature.copy(time = newTime)
+        val newTime = temperature.chartTime.minusHours(min.hour.toLong())
+        temperature.copy(chartTime = newTime)
     }.map { temperature ->
         ChartData(
-            offset = Offset(x = temperature.time.hour.toFloat(), y = temperature.temperature),
-            textOnOffset = temperature.temperature.toInt().toString()
+            offset = Offset(x = temperature.chartTime.hour.toFloat(), y = temperature.temperature),
+            textOnOffset = temperature.temperature.toInt().toString() + "°",
+            textOnXAxis = temperature.time.format(DateTimeFormatter.ofPattern("HH:mm"))
         )
     }
 }

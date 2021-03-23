@@ -19,10 +19,12 @@ import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberScrollableState
 import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,11 +44,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.android.material.animation.AnimationUtils.lerp
 import net.kwmt27.chart.model.ChartData
 import net.kwmt27.chart.util.paint
 import net.kwmt27.chart.util.textPaint
-import kotlin.math.min
 
 @Composable
 fun Chart(
@@ -58,62 +58,106 @@ fun Chart(
     textColor: Color = Color.Black,
     textSize: TextUnit = 18.sp,
 ) {
-    var offset by remember { mutableStateOf(0f) }
-    Canvas(
+    ChartArea(
         modifier = modifier
-            .fillMaxSize()
-            .scrollable(
-                orientation = Orientation.Horizontal,
-                state = rememberScrollableState { delta ->
-                    offset += delta / 100
-                    Log.d("kwmt", "offset: $offset")
-                    delta
-                }
-            )
-            .background(color = Color.Gray)
     ) {
-        drawIntoCanvas { canvas ->
-            val height = size.height
-            val xUnit = 120f //width / list.size
-            val minValue = list.minOf { it.offset.y }
-            val maxValue = list.maxOf { it.offset.y }
-            val diff = maxValue - minValue
-            val yUnit = height / diff
+        var offset by remember { mutableStateOf(0f) }
+        Canvas(
+            modifier =
+            Modifier
+                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                .fillMaxSize()
+                .scrollable(
+                    orientation = Orientation.Horizontal,
+                    state = rememberScrollableState { delta ->
+                        offset += delta / 100
+                        Log.d("kwmt", "offset: $offset")
+                        delta
+                    }
+                )
+                .background(color = Color.Gray)
+        ) {
+            // X-axis draw time
+            drawIntoCanvas { canvas ->
+                val height = size.height
+                val xUnit = 120f //width / list.size
+                val minValue = list.minOf { it.offset.y }
+                val maxValue = list.maxOf { it.offset.y }
+                val diff = maxValue - minValue
+                val yUnit = height / diff
+                val textPaint = textPaint(textColor)
 
-
-            val firstItem = list.first()
-            val lastItem = list.last()
-
-            val firstOffset =firstItem.offset // newOffset(firstItem.offset, xUnit, yUnit, minValue, height)
-            val lastOffset = lastItem.offset //newOffset(lastItem.offset, xUnit, yUnit, minValue, height)
+                list.forEach { chartData ->
+                    val (offsetX, screenOffsetY) = newOffset(
+                        chartData.offset.copy(chartData.offset.x + offset, chartData.offset.y),
+                        xUnit,
+                        yUnit,
+                        minValue,
+                        height
+                    )
+                    drawTextXAxisPoint(
+                        canvas,
+                        chartData.textOnXAxis,
+                        offsetX,
+                        height,
+                        textPaint,
+                        10.sp,
+                        this
+                    )
+                }
+            }
+            // draw chart
+            drawIntoCanvas { canvas ->
+                val height = size.height - 24.dp.toPx()
+                val xUnit = 120f //width / list.size
+                val minValue = list.minOf { it.offset.y }
+                val maxValue = list.maxOf { it.offset.y }
+                val diff = maxValue - minValue
+                val yUnit = height / diff
+                val firstItem = list.first()
+                val lastItem = list.last()
+                val firstOffset =
+                    firstItem.offset // newOffset(firstItem.offset, xUnit, yUnit, minValue, height)
+                val lastOffset =
+                    lastItem.offset //newOffset(lastItem.offset, xUnit, yUnit, minValue, height)
 //            val scrollNewOffset = offset * xUnit
 //            enabled = size.width/xUnit < lastItem.offset.x + offset
-
-            Log.d("kwmt", " ${size.width} ${size.width/xUnit} ${lastItem.offset * xUnit} $offset ${firstOffset.x + offset} ${lastOffset.x + offset}")
-            drawChart(
-                canvas,
-                list.map {
-                    it.copy(
-                        offset = Offset(
-                            min(size.width/xUnit, it.offset.x + offset)
-                            ,
-                            it.offset.y
+                Log.d(
+                    "kwmt",
+                    " ${size.width} ${size.width / xUnit} ${lastItem.offset * xUnit} $offset ${firstOffset.x + offset} ${lastOffset.x + offset}"
+                )
+                drawChart(
+                    canvas,
+                    list.map {
+                        it.copy(
+                            offset = Offset(
+                                it.offset.x + offset,
+                                it.offset.y
+                            )
                         )
-                    )
-                },
-                xUnit,
-                yUnit,
-                height,
-                minValue,
-                lineColor,
-                circleColor,
-                this,
-                distanceFromOffsetToText.toPx(),
-                textColor,
-                textSize,
-            )
+                    },
+                    xUnit,
+                    yUnit,
+                    height,
+                    minValue,
+                    lineColor,
+                    circleColor,
+                    this,
+                    distanceFromOffsetToText.toPx(),
+                    textColor,
+                    textSize,
+                )
+            }
         }
     }
+}
+
+@Composable
+fun ChartArea(modifier: Modifier, content: @Composable (BoxScope.() -> Unit)) {
+    Box(
+        modifier = modifier,
+        content = content,
+    )
 }
 
 private fun drawChart(
@@ -179,7 +223,6 @@ private fun drawCircleAndText(
             textSize,
             drawScope
         )
-
         drawCirclePoint(canvas, offsetX, screenOffsetY, circlePaint)
     }
 }
@@ -217,6 +260,23 @@ private fun drawTextPoint(
     )
 }
 
+private fun drawTextXAxisPoint(
+    canvas: Canvas,
+    text: String,
+    offsetX: Float,
+    height: Float,
+    textPaint: android.graphics.Paint,
+    textSize: TextUnit,
+    drawScope: DrawScope
+) {
+    canvas.nativeCanvas.drawText(
+        text,
+        offsetX,
+        height,
+        paint(drawScope = drawScope, paint = textPaint, textUnit = textSize)
+    )
+}
+
 private fun drawChartLine(
     canvas: Canvas,
     list: List<ChartData>,
@@ -229,7 +289,13 @@ private fun drawChartLine(
     // chart
     val path = Path().apply {
         list.forEachIndexed { index, chartData ->
-            val (offsetX, screenOffsetY) = newOffset(chartData.offset, xUnit, yUnit, minValue, height)
+            val (offsetX, screenOffsetY) = newOffset(
+                chartData.offset,
+                xUnit,
+                yUnit,
+                minValue,
+                height
+            )
             if (index == 0) {
                 moveTo(offsetX, screenOffsetY)
             } else {
