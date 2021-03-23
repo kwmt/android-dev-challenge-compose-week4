@@ -37,6 +37,7 @@ import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.res.painterResource
@@ -48,6 +49,7 @@ import com.example.androiddevchallenge.domain.model.translateTemperatureByTimeTo
 import com.example.androiddevchallenge.ui.theme.DevChallengeColors
 import com.example.androiddevchallenge.ui.theme.DevChallengeScaffold
 import com.example.androiddevchallenge.ui.theme.DevChallengeTheme
+import com.example.androiddevchallenge.ui.theme.GrayAlpha
 import com.example.androiddevchallenge.ui.utils.DrawableResImage
 import net.kwmt27.chart.Chart
 
@@ -88,6 +90,7 @@ fun MyApp() {
                     modifier = m
                 ) {
                     Chart(
+                        modifier = Modifier.background(GrayAlpha),
                         list = translateTemperatureByTimeToChartData(createData()),
                         lineColor = DevChallengeTheme.colors.surface,
                         textColor = DevChallengeTheme.colors.surface,

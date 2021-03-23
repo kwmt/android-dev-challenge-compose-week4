@@ -88,7 +88,6 @@ fun Chart(
                         delta
                     }
                 )
-                .background(color = Color.Gray)
         ) {
             // X-axis draw time
             drawIntoCanvas { canvas ->
