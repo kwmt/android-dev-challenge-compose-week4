@@ -108,9 +108,10 @@ fun DevChallengeScaffold(
     content: @Composable() () -> Unit
 ) {
     MyTheme(darkTheme) {
-        Scaffold(backgroundColor = surfaceColor(), bottomBar = bottomBar) {
-            content()
-        }
+        content()
+        /*Scaffold(backgroundColor = surfaceColor(), bottomBar = bottomBar) {
+
+        }*/
     }
 }
 
@@ -124,7 +125,7 @@ fun MyTheme(darkTheme: Boolean, content: @Composable() () -> Unit) {
     val sysUiController = LocalSysUiController.current
     SideEffect {
         sysUiController.setSystemBarsColor(
-            color = colors.background // .copy(alpha = AlphaNearOpaque)
+            color = colors.background.copy(alpha = AlphaNearOpaque)
         )
     }
     ProvideDevChallengeColors(colors) {

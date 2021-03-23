@@ -35,10 +35,14 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -50,19 +54,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.WindowCompat
 import com.example.androiddevchallenge.domain.model.createData
 import com.example.androiddevchallenge.domain.model.translateTemperatureByTimeToChartData
 import com.example.androiddevchallenge.ui.theme.DevChallengeScaffold
 import com.example.androiddevchallenge.ui.theme.DevChallengeTheme
 import com.example.androiddevchallenge.ui.theme.GrayAlpha
 import com.example.androiddevchallenge.ui.utils.DrawableResImage
+import com.example.androiddevchallenge.ui.utils.LocalSysUiController
+import com.example.androiddevchallenge.ui.utils.SystemUiController
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
+import dev.chrisbanes.accompanist.insets.statusBarsPadding
 import net.kwmt27.chart.Chart
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            DevChallengeScaffold {
+            val systemUiController = remember { SystemUiController(window) }
+            CompositionLocalProvider(LocalSysUiController provides systemUiController) {
                 MyApp()
             }
         }
@@ -72,35 +83,42 @@ class MainActivity : AppCompatActivity() {
 // Start building your app here!
 @Composable
 fun MyApp() {
-    DevChallengeScaffold {
-        Box(modifier = Modifier.fillMaxHeight()) {
-            DrawableResImage(
-                modifier = Modifier.fillMaxSize(),
-                drawableRes = R.drawable.sunrise,
-                contentScale = ContentScale.Crop
-            )
-
-            Column(
+    ProvideWindowInsets {
+        DevChallengeScaffold {
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxHeight()
+
             ) {
-                HomeTitle(
-                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
-                    text = "San Francisco, CA (U.S.A)", before = 32.dp
+                DrawableResImage(
+                    modifier = Modifier.fillMaxSize(),
+                    drawableRes = R.drawable.sunrise,
+                    contentScale = ContentScale.Crop
                 )
 
-                CircleCurrentTemperatureView()
-
-                Box(
-                    modifier = Modifier.height(180.dp)
+                Column(
+                    modifier = Modifier
+                        .statusBarsPadding()
+                        .fillMaxWidth()
                 ) {
-                    Chart(
-                        modifier = Modifier.background(GrayAlpha),
-                        list = translateTemperatureByTimeToChartData(createData()),
-                        lineColor = DevChallengeTheme.colors.surface,
-                        textColor = DevChallengeTheme.colors.surface,
-                        circleColor = DevChallengeTheme.colors.surface,
+                    HomeTitle(
+                        modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+                        text = "San Francisco, CA (U.S.A)", before = 32.dp
                     )
+
+                    CircleCurrentTemperatureView()
+
+                    Box(
+                        modifier = Modifier.height(180.dp)
+                    ) {
+                        Chart(
+                            modifier = Modifier.background(GrayAlpha),
+                            list = translateTemperatureByTimeToChartData(createData()),
+                            lineColor = DevChallengeTheme.colors.surface,
+                            textColor = DevChallengeTheme.colors.surface,
+                            circleColor = DevChallengeTheme.colors.surface,
+                        )
+                    }
                 }
             }
         }
