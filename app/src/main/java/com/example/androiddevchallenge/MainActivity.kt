@@ -85,6 +85,11 @@ fun MyApp() {
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
+                HomeTitle(
+                    modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 8.dp),
+                    text = "San Francisco, CA (U.S.A)", before = 32.dp
+                )
+
                 BoxWithConstraints(
                     modifier = Modifier.padding(
                         start = 16.dp,
@@ -116,7 +121,7 @@ fun MyApp() {
                                         "°",
                                         fontSize = 30.sp,
                                         color = DevChallengeTheme.colors.surface,
-                                        )
+                                    )
                                     Text(
                                         "/",
                                         fontSize = 36.sp,
@@ -131,7 +136,7 @@ fun MyApp() {
                                         "°",
                                         fontSize = 30.sp,
                                         color = DevChallengeTheme.colors.surface,
-                                        )
+                                    )
                                 }
                                 Row {
                                     Text(
@@ -145,7 +150,7 @@ fun MyApp() {
                                         fontSize = 40.sp,
                                         color = DevChallengeTheme.colors.surface,
                                         fontWeight = FontWeight.Bold
-                                        )
+                                    )
                                 }
                                 Text(
                                     "2021/03/24",
@@ -161,9 +166,6 @@ fun MyApp() {
                         }
                     }
                 }
-
-
-                HomeTitle(text = "Browse themes", before = 32.dp)
                 val m = Modifier.height(180.dp)
                 Box(
                     modifier = m
@@ -201,12 +203,11 @@ fun DarkPreview() {
 private fun HomeTitle(
     modifier: Modifier = Modifier,
     text: String,
-    before: Dp,
-    isFilterIcon: Boolean = false
+    before: Dp
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.Center,
     ) {
         Text(
             modifier = Modifier
@@ -215,14 +216,5 @@ private fun HomeTitle(
             style = DevChallengeTheme.typography.h1,
             color = DevChallengeTheme.colors.textH1
         )
-        if (isFilterIcon) {
-            Icon(
-                Icons.Filled.FilterList, contentDescription = null,
-                tint = DevChallengeTheme.colors.textBody1,
-                modifier = Modifier
-                    .size(24.dp)
-                    .align(Alignment.Bottom)
-            )
-        }
     }
 }
