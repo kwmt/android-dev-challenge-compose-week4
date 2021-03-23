@@ -109,7 +109,9 @@ fun MyApp() {
                     CircleCurrentTemperatureView()
 
                     Box(
-                        modifier = Modifier.height(180.dp)
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .height(180.dp)
                     ) {
                         Chart(
                             modifier = Modifier.background(GrayAlpha),
