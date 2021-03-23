@@ -121,7 +121,7 @@ fun Chart(
                         offsetX,
                         0f,
                         textPaint,
-                        10.sp,
+                        13.sp,
                         this
                     )
                 }
