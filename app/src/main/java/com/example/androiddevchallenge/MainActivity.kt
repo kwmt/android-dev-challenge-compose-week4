@@ -18,7 +18,6 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,16 +36,13 @@ import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.domain.model.createData
 import com.example.androiddevchallenge.domain.model.translateTemperatureByTimeToChartData
-import com.example.androiddevchallenge.ui.theme.DevChallengeColors
 import com.example.androiddevchallenge.ui.theme.DevChallengeScaffold
 import com.example.androiddevchallenge.ui.theme.DevChallengeTheme
 import com.example.androiddevchallenge.ui.theme.GrayAlpha
@@ -69,8 +65,7 @@ class MainActivity : AppCompatActivity() {
 fun MyApp() {
 //    Surface(color = MaterialTheme.colors.background) {
     DevChallengeScaffold {
-        Box(modifier =  Modifier.fillMaxHeight()) {
-
+        Box(modifier = Modifier.fillMaxHeight()) {
 
             DrawableResImage(
 
