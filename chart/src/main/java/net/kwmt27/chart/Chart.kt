@@ -96,7 +96,7 @@ fun Chart(
                 val minValue = list.minOf { it.offset.y } // 0°
                 val maxValue = list.maxOf { it.offset.y } // 11°
                 val diff = maxValue - minValue
-                val yUnit = (height - 50.dp.toPx()) / diff
+                val yUnit = (height - 60.dp.toPx()) / diff
                 val textPaint = textPaint(textColor)
 
                 list.forEach { chartData ->
@@ -113,7 +113,7 @@ fun Chart(
                             .asImageBitmap()
                     val halfImageWidth = imageBitmap.width / 2
                     drawImage(
-                        imageBitmap, Offset(offsetX - halfImageWidth, 0f)
+                        imageBitmap, Offset(offsetX - halfImageWidth, 10f)
                     )
                     drawTextXAxisPoint(
                         canvas,
