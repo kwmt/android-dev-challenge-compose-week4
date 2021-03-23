@@ -140,7 +140,7 @@ fun MyApp() {
                                 }
                                 Row {
                                     Text(
-                                        "42",
+                                        "41",
                                         fontSize = 80.sp,
                                         color = DevChallengeTheme.colors.surface,
                                         fontWeight = FontWeight.Bold
@@ -158,7 +158,7 @@ fun MyApp() {
                                     color = DevChallengeTheme.colors.surface,
                                 )
                                 Text(
-                                    "8:23",
+                                    "6:23",
                                     fontSize = 24.sp,
                                     color = DevChallengeTheme.colors.surface,
                                 )
