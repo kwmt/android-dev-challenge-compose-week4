@@ -21,14 +21,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.paddingFrom
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -36,11 +41,15 @@ import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.domain.model.createData
 import com.example.androiddevchallenge.domain.model.translateTemperatureByTimeToChartData
 import com.example.androiddevchallenge.ui.theme.DevChallengeScaffold
@@ -66,9 +75,7 @@ fun MyApp() {
 //    Surface(color = MaterialTheme.colors.background) {
     DevChallengeScaffold {
         Box(modifier = Modifier.fillMaxHeight()) {
-
             DrawableResImage(
-
                 modifier = Modifier.fillMaxSize(),
                 drawableRes = R.drawable.sunrise,
                 contentScale = ContentScale.Crop
@@ -76,9 +83,86 @@ fun MyApp() {
 
             Column(
                 modifier = Modifier
-//                .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
                     .fillMaxWidth()
             ) {
+                BoxWithConstraints(
+                    modifier = Modifier.padding(
+                        start = 16.dp,
+                        top = 8.dp,
+                        end = 16.dp,
+                        bottom = 8.dp
+                    )
+                ) {
+                    val boxWidth = with(LocalDensity.current) { constraints.maxWidth.toDp() }
+                    Box(
+                        modifier = Modifier
+                            .size(boxWidth)
+                            .background(
+                                color = GrayAlpha,
+                                shape = RoundedCornerShape(CornerSize(boxWidth / 2))
+                            )
+                    ) {
+                        Box(modifier = Modifier.align(Alignment.Center)) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Row {
+                                    Text(
+                                        "41",
+                                        fontSize = 36.sp,
+                                        color = DevChallengeTheme.colors.surface,
+                                    )
+                                    Text(
+                                        "°",
+                                        fontSize = 30.sp,
+                                        color = DevChallengeTheme.colors.surface,
+                                        )
+                                    Text(
+                                        "/",
+                                        fontSize = 36.sp,
+                                        color = DevChallengeTheme.colors.surface,
+                                    )
+                                    Text(
+                                        "51",
+                                        fontSize = 36.sp,
+                                        color = DevChallengeTheme.colors.surface,
+                                    )
+                                    Text(
+                                        "°",
+                                        fontSize = 30.sp,
+                                        color = DevChallengeTheme.colors.surface,
+                                        )
+                                }
+                                Row {
+                                    Text(
+                                        "42",
+                                        fontSize = 80.sp,
+                                        color = DevChallengeTheme.colors.surface,
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                    Text(
+                                        "°",
+                                        fontSize = 40.sp,
+                                        color = DevChallengeTheme.colors.surface,
+                                        fontWeight = FontWeight.Bold
+                                        )
+                                }
+                                Text(
+                                    "2021/03/24",
+                                    fontSize = 24.sp,
+                                    color = DevChallengeTheme.colors.surface,
+                                )
+                                Text(
+                                    "8:23",
+                                    fontSize = 24.sp,
+                                    color = DevChallengeTheme.colors.surface,
+                                )
+                            }
+                        }
+                    }
+                }
+
+
                 HomeTitle(text = "Browse themes", before = 32.dp)
                 val m = Modifier.height(180.dp)
                 Box(
