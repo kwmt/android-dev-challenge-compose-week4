@@ -15,8 +15,11 @@
  */
 package net.kwmt27.chart
 
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.VectorDrawable
 import android.util.Log
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.rememberScrollableState
@@ -34,16 +37,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.ImageBitmapConfig
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.PaintingStyle
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import net.kwmt27.chart.model.ChartData
 import net.kwmt27.chart.util.paint
 import net.kwmt27.chart.util.textPaint
@@ -61,6 +73,7 @@ fun Chart(
     ChartArea(
         modifier = modifier
     ) {
+        val context = LocalContext.current
         var offset by remember { mutableStateOf(0f) }
         Canvas(
             modifier =
@@ -94,6 +107,11 @@ fun Chart(
                         yUnit,
                         minValue,
                         height
+                    )
+
+                    drawImage(
+                        ContextCompat.getDrawable(context, chartData.imageDrawable!!)!!.toBitmap()
+                            .asImageBitmap(), Offset(offsetX, height)
                     )
                     drawTextXAxisPoint(
                         canvas,

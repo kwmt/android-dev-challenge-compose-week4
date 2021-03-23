@@ -16,6 +16,7 @@
 package com.example.androiddevchallenge.domain.model
 
 import androidx.compose.ui.geometry.Offset
+import com.example.androiddevchallenge.R
 import net.kwmt27.chart.model.ChartData
 import org.threeten.bp.LocalTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -36,6 +37,8 @@ data class Temperature(
      * 温度
      */
     val temperature: Float,
+
+    val image: Int,
 )
 
 fun translateTemperatureByTimeToChartData(temperatures: List<Temperature>): List<ChartData> {
@@ -51,7 +54,9 @@ fun translateTemperatureByTimeToChartData(temperatures: List<Temperature>): List
         ChartData(
             offset = Offset(x = temperature.chartTime.hour.toFloat(), y = temperature.temperature),
             textOnOffset = temperature.temperature.toInt().toString() + "°",
-            textOnXAxis = temperature.time.format(DateTimeFormatter.ofPattern("HH:mm"))
+            textOnXAxis = temperature.time.format(DateTimeFormatter.ofPattern("HH:mm")),
+            imageDrawable = temperature.image
+
         )
     }
 }
@@ -61,54 +66,67 @@ fun createData(): List<Temperature> {
         Temperature(
             time = LocalTime.of(6, 0),
             temperature = 5f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(7, 0),
             temperature = 5f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(8, 0),
             temperature = 6f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(9, 0),
             temperature = 6f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(10, 0),
             temperature = 7f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(11, 0),
             temperature = 8f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(12, 0),
             temperature = 3f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(13, 0),
             temperature = 10f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(14, 0),
             temperature = 0f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(15, 0),
             temperature = 11f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(16, 0),
             temperature = 10f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(17, 0),
             temperature = 8f,
+            image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(18, 0),
             temperature = 6f,
+            image = R.drawable.ic_sun
         ),
     )
 }

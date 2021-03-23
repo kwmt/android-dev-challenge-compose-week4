@@ -15,6 +15,7 @@
  */
 package net.kwmt27.chart.model
 
+import androidx.annotation.DrawableRes
 import androidx.compose.ui.geometry.Offset
 
 data class ChartData(
@@ -28,6 +29,8 @@ data class ChartData(
     val textOnOffset: String = "",
 
     val textOnXAxis: String = "",
+
+    @DrawableRes val imageDrawable: Int? = null,
 //    /**
 //     * 点を表す円のカラー
 //     */
