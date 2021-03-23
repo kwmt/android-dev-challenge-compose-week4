@@ -78,7 +78,7 @@ fun Chart(
         Canvas(
             modifier =
             Modifier
-                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                .padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 16.dp)
                 .fillMaxSize()
                 .scrollable(
                     orientation = Orientation.Horizontal,
@@ -93,10 +93,10 @@ fun Chart(
             drawIntoCanvas { canvas ->
                 val height = size.height
                 val xUnit = 120f //width / list.size
-                val minValue = list.minOf { it.offset.y }
-                val maxValue = list.maxOf { it.offset.y }
+                val minValue = list.minOf { it.offset.y } // 0°
+                val maxValue = list.maxOf { it.offset.y } // 11°
                 val diff = maxValue - minValue
-                val yUnit = height / diff
+                val yUnit = (height - 50.dp.toPx()) / diff
                 val textPaint = textPaint(textColor)
 
                 list.forEach { chartData ->
@@ -107,42 +107,25 @@ fun Chart(
                         minValue,
                         height
                     )
-
-                    drawImage(
+                    // FIXME: force unwrap
+                    val imageBitmap =
                         ContextCompat.getDrawable(context, chartData.imageDrawable!!)!!.toBitmap()
-                            .asImageBitmap(), Offset(offsetX, height)
+                            .asImageBitmap()
+                    val halfImageWidth = imageBitmap.width / 2
+                    drawImage(
+                        imageBitmap, Offset(offsetX - halfImageWidth, 0f)
                     )
                     drawTextXAxisPoint(
                         canvas,
                         chartData.textOnXAxis,
                         offsetX,
-                        height,
+                        0f,
                         textPaint,
                         10.sp,
                         this
                     )
                 }
-            }
-            // draw chart
-            drawIntoCanvas { canvas ->
-                val height = size.height - 24.dp.toPx()
-                val xUnit = 120f //width / list.size
-                val minValue = list.minOf { it.offset.y }
-                val maxValue = list.maxOf { it.offset.y }
-                val diff = maxValue - minValue
-                val yUnit = height / diff
-                val firstItem = list.first()
-                val lastItem = list.last()
-                val firstOffset =
-                    firstItem.offset // newOffset(firstItem.offset, xUnit, yUnit, minValue, height)
-                val lastOffset =
-                    lastItem.offset //newOffset(lastItem.offset, xUnit, yUnit, minValue, height)
-//            val scrollNewOffset = offset * xUnit
-//            enabled = size.width/xUnit < lastItem.offset.x + offset
-                Log.d(
-                    "kwmt",
-                    " ${size.width} ${size.width / xUnit} ${lastItem.offset * xUnit} $offset ${firstOffset.x + offset} ${lastOffset.x + offset}"
-                )
+                // draw chart
                 drawChart(
                     canvas,
                     list.map {

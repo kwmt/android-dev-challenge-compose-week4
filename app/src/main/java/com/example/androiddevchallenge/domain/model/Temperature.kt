@@ -95,7 +95,7 @@ fun createData(): List<Temperature> {
         ),
         Temperature(
             time = LocalTime.of(12, 0),
-            temperature = 3f,
+            temperature = 9f,
             image = R.drawable.ic_sun
         ),
         Temperature(
@@ -105,7 +105,7 @@ fun createData(): List<Temperature> {
         ),
         Temperature(
             time = LocalTime.of(14, 0),
-            temperature = 0f,
+            temperature = 11f,
             image = R.drawable.ic_sun
         ),
         Temperature(
@@ -120,7 +120,7 @@ fun createData(): List<Temperature> {
         ),
         Temperature(
             time = LocalTime.of(17, 0),
-            temperature = 8f,
+            temperature = 10f,
             image = R.drawable.ic_sun
         ),
         Temperature(

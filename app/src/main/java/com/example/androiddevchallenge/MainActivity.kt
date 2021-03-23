@@ -80,7 +80,7 @@ fun MyApp() {
                     .fillMaxWidth()
             ) {
                 HomeTitle(text = "Browse themes", before = 32.dp)
-                val m = Modifier.height(100.dp)
+                val m = Modifier.height(180.dp)
                 Box(
                     modifier = m
                 ) {
