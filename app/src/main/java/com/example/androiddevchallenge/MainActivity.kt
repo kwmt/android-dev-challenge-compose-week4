@@ -72,7 +72,6 @@ class MainActivity : AppCompatActivity() {
 // Start building your app here!
 @Composable
 fun MyApp() {
-//    Surface(color = MaterialTheme.colors.background) {
     DevChallengeScaffold {
         Box(modifier = Modifier.fillMaxHeight()) {
             DrawableResImage(
@@ -90,85 +89,10 @@ fun MyApp() {
                     text = "San Francisco, CA (U.S.A)", before = 32.dp
                 )
 
-                BoxWithConstraints(
-                    modifier = Modifier.padding(
-                        start = 16.dp,
-                        top = 8.dp,
-                        end = 16.dp,
-                        bottom = 8.dp
-                    )
-                ) {
-                    val boxWidth = with(LocalDensity.current) { constraints.maxWidth.toDp() }
-                    Box(
-                        modifier = Modifier
-                            .size(boxWidth)
-                            .background(
-                                color = GrayAlpha,
-                                shape = RoundedCornerShape(CornerSize(boxWidth / 2))
-                            )
-                    ) {
-                        Box(modifier = Modifier.align(Alignment.Center)) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Row {
-                                    Text(
-                                        "41",
-                                        fontSize = 36.sp,
-                                        color = DevChallengeTheme.colors.surface,
-                                    )
-                                    Text(
-                                        "°",
-                                        fontSize = 30.sp,
-                                        color = DevChallengeTheme.colors.surface,
-                                    )
-                                    Text(
-                                        "/",
-                                        fontSize = 36.sp,
-                                        color = DevChallengeTheme.colors.surface,
-                                    )
-                                    Text(
-                                        "51",
-                                        fontSize = 36.sp,
-                                        color = DevChallengeTheme.colors.surface,
-                                    )
-                                    Text(
-                                        "°",
-                                        fontSize = 30.sp,
-                                        color = DevChallengeTheme.colors.surface,
-                                    )
-                                }
-                                Row {
-                                    Text(
-                                        "41",
-                                        fontSize = 80.sp,
-                                        color = DevChallengeTheme.colors.surface,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                    Text(
-                                        "°",
-                                        fontSize = 40.sp,
-                                        color = DevChallengeTheme.colors.surface,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                }
-                                Text(
-                                    "2021/03/24",
-                                    fontSize = 24.sp,
-                                    color = DevChallengeTheme.colors.surface,
-                                )
-                                Text(
-                                    "6:23",
-                                    fontSize = 24.sp,
-                                    color = DevChallengeTheme.colors.surface,
-                                )
-                            }
-                        }
-                    }
-                }
-                val m = Modifier.height(180.dp)
+                CircleCurrentTemperatureView()
+
                 Box(
-                    modifier = m
+                    modifier = Modifier.height(180.dp)
                 ) {
                     Chart(
                         modifier = Modifier.background(GrayAlpha),
@@ -176,6 +100,86 @@ fun MyApp() {
                         lineColor = DevChallengeTheme.colors.surface,
                         textColor = DevChallengeTheme.colors.surface,
                         circleColor = DevChallengeTheme.colors.surface,
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CircleCurrentTemperatureView() {
+    BoxWithConstraints(
+        modifier = Modifier.padding(
+            start = 16.dp,
+            top = 8.dp,
+            end = 16.dp,
+            bottom = 8.dp
+        )
+    ) {
+        val boxWidth = with(LocalDensity.current) { constraints.maxWidth.toDp() }
+        Box(
+            modifier = Modifier
+                .size(boxWidth)
+                .background(
+                    color = GrayAlpha,
+                    shape = RoundedCornerShape(CornerSize(boxWidth / 2))
+                )
+        ) {
+            Box(modifier = Modifier.align(Alignment.Center)) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Row {
+                        Text(
+                            "41",
+                            fontSize = 36.sp,
+                            color = DevChallengeTheme.colors.surface,
+                        )
+                        Text(
+                            "°",
+                            fontSize = 30.sp,
+                            color = DevChallengeTheme.colors.surface,
+                        )
+                        Text(
+                            "/",
+                            fontSize = 36.sp,
+                            color = DevChallengeTheme.colors.surface,
+                        )
+                        Text(
+                            "51",
+                            fontSize = 36.sp,
+                            color = DevChallengeTheme.colors.surface,
+                        )
+                        Text(
+                            "°",
+                            fontSize = 30.sp,
+                            color = DevChallengeTheme.colors.surface,
+                        )
+                    }
+                    Row {
+                        Text(
+                            "41",
+                            fontSize = 80.sp,
+                            color = DevChallengeTheme.colors.surface,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            "°",
+                            fontSize = 40.sp,
+                            color = DevChallengeTheme.colors.surface,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Text(
+                        "2021/03/24",
+                        fontSize = 24.sp,
+                        color = DevChallengeTheme.colors.surface,
+                    )
+                    Text(
+                        "6:23",
+                        fontSize = 24.sp,
+                        color = DevChallengeTheme.colors.surface,
                     )
                 }
             }
