@@ -18,10 +18,14 @@ package com.example.androiddevchallenge
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.paddingFrom
@@ -33,14 +37,18 @@ import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.domain.model.createData
 import com.example.androiddevchallenge.domain.model.translateTemperatureByTimeToChartData
+import com.example.androiddevchallenge.ui.theme.DevChallengeColors
 import com.example.androiddevchallenge.ui.theme.DevChallengeScaffold
 import com.example.androiddevchallenge.ui.theme.DevChallengeTheme
+import com.example.androiddevchallenge.ui.utils.DrawableResImage
 import net.kwmt27.chart.Chart
 
 class MainActivity : AppCompatActivity() {
@@ -59,22 +67,33 @@ class MainActivity : AppCompatActivity() {
 fun MyApp() {
 //    Surface(color = MaterialTheme.colors.background) {
     DevChallengeScaffold {
-        Column(
-            modifier = Modifier
-//                .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
-                .fillMaxWidth()
-        ) {
-            HomeTitle(text = "Browse themes", before = 32.dp)
+        Box(modifier =  Modifier.fillMaxHeight()) {
 
-            val m = Modifier.height(100.dp)
-            Box(
-                modifier = m
+
+            DrawableResImage(
+
+                modifier = Modifier.fillMaxSize(),
+                drawableRes = R.drawable.sunrise,
+                contentScale = ContentScale.Crop
+            )
+
+            Column(
+                modifier = Modifier
+//                .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
+                    .fillMaxWidth()
             ) {
-                Chart(
-                    list = translateTemperatureByTimeToChartData(createData()),
-                    textColor = DevChallengeTheme.colors.textBody1,
-                    circleColor = DevChallengeTheme.colors.surface,
-                )
+                HomeTitle(text = "Browse themes", before = 32.dp)
+                val m = Modifier.height(100.dp)
+                Box(
+                    modifier = m
+                ) {
+                    Chart(
+                        list = translateTemperatureByTimeToChartData(createData()),
+                        lineColor = DevChallengeTheme.colors.surface,
+                        textColor = DevChallengeTheme.colors.surface,
+                        circleColor = DevChallengeTheme.colors.surface,
+                    )
+                }
             }
         }
     }
