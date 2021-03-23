@@ -65,67 +65,67 @@ fun createData(): List<Temperature> {
     return listOf(
         Temperature(
             time = LocalTime.of(6, 0),
-            temperature = 5f,
+            temperature = 41f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(7, 0),
-            temperature = 5f,
+            temperature = 41f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(8, 0),
-            temperature = 6f,
+            temperature = 42.8f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(9, 0),
-            temperature = 6f,
+            temperature = 42.8f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(10, 0),
-            temperature = 7f,
+            temperature = 44.6f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(11, 0),
-            temperature = 8f,
-            image = R.drawable.ic_sun
+            temperature = 48.2f,
+            image = R.drawable.ic_sunny
         ),
         Temperature(
             time = LocalTime.of(12, 0),
-            temperature = 9f,
-            image = R.drawable.ic_sun
+            temperature = 48.2f,
+            image = R.drawable.ic_sunny
         ),
         Temperature(
             time = LocalTime.of(13, 0),
-            temperature = 10f,
-            image = R.drawable.ic_sun
+            temperature = 50f,
+            image = R.drawable.ic_sunny
         ),
         Temperature(
             time = LocalTime.of(14, 0),
-            temperature = 11f,
+            temperature = 51.8f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(15, 0),
-            temperature = 11f,
+            temperature = 51.8f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(16, 0),
-            temperature = 10f,
+            temperature = 50f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(17, 0),
-            temperature = 10f,
+            temperature = 50f,
             image = R.drawable.ic_sun
         ),
         Temperature(
             time = LocalTime.of(18, 0),
-            temperature = 6f,
+            temperature = 42.8f,
             image = R.drawable.ic_sun
         ),
     )
