@@ -42,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.LastBaseline
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -86,7 +87,8 @@ fun MyApp() {
                 DrawableResImage(
                     modifier = Modifier.fillMaxSize(),
                     drawableRes = R.drawable.sunrise,
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
+                    contentDescription = stringResource(R.string.discription_background_image)
                 )
 
                 Column(

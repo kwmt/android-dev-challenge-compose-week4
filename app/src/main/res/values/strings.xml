@@ -10,4 +10,5 @@
       the License.
       -->
     <string name="app_name">AndroidDevChallenge</string>
+    <string name="discription_background_image">background of sunrise</string>
 </resources>
