@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 
 val Pink100 = Color(0xFFFFF1F1)
 val Pink900 = Color(0xFF3F2C2C)
+val Black = Color(0xFF000000)
 val White = Color(0xFFFFFFFF)
 val White850 = Color(0xD9FFFFFF)
 val Gray = Color(0xFF232323)
