@@ -53,7 +53,6 @@ import com.example.androiddevchallenge.domain.model.createData
 import com.example.androiddevchallenge.domain.model.translateTemperatureByTimeToChartData
 import com.example.androiddevchallenge.ui.theme.DevChallengeScaffold
 import com.example.androiddevchallenge.ui.theme.DevChallengeTheme
-import com.example.androiddevchallenge.ui.theme.GrayAlpha
 import com.example.androiddevchallenge.ui.utils.DrawableResImage
 import com.example.androiddevchallenge.ui.utils.LocalSysUiController
 import com.example.androiddevchallenge.ui.utils.SystemUiController
