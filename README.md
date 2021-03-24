@@ -12,12 +12,12 @@ Wheater forecast app built using Jetpack Compose.
 ## :bulb: Motivation and Context
 <!--- Optionally point readers to interesting parts of your submission. -->
 <!--- What are you especially proud of? -->
-I was inspired by this app.
+- I was inspired by this app.
 https://apps.apple.com/app/id1363846787#?platform=iphone
 
-And, my goal was to draw a chart using Jetpack Compose. 
+- And, my goal was to draw a chart using Jetpack Compose. 
 The scrolling control of the chart was difficult for me. 
-All weather data is dummy.
+- All weather data is dummy.
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
