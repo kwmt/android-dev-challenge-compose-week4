@@ -55,26 +55,27 @@ private val LightColorPalette = DevChallengeColors(
     primary = Pink100,
     secondary = Pink900,
     background = White,
-    surface = White850,
+    surface = GrayCircleLight,
     onPrimary = Gray,
     onSecondary = White,
     onBackground = Gray,
     onSurface = Gray,
     textButton1 = White,
     textButton2 = Pink900,
-    textH1 = White,
+    textH1 = Gray,
     textH2 = Gray,
     textSubtitle1 = Gray,
     textBody1 = Gray,
-    textBody2 = Gray,
+    textBody2 = LineLight,
     textCaption = Gray,
+    backgroundAlpha = WhiteAlpha,
     isDark = false
 )
 private val DarkColorPalette = DevChallengeColors(
     primary = Green900,
     secondary = Green300,
     background = Gray,
-    surface = White150,
+    surface = GrayCircleDark,
     onPrimary = White,
     onSecondary = Gray,
     onBackground = White,
@@ -85,8 +86,9 @@ private val DarkColorPalette = DevChallengeColors(
     textH2 = White,
     textSubtitle1 = White,
     textBody1 = White,
-    textBody2 = White,
+    textBody2 = LineDark,
     textCaption = White,
+    backgroundAlpha = GrayAlpha,
     isDark = false
 )
 
@@ -164,6 +166,7 @@ class DevChallengeColors(
     textBody1: Color,
     textBody2: Color,
     textCaption: Color,
+    backgroundAlpha: Color,
     isDark: Boolean
 ) {
     var primary by mutableStateOf(primary)
@@ -198,6 +201,8 @@ class DevChallengeColors(
         private set
     var textCaption by mutableStateOf(textCaption)
         private set
+    var backgroundAlpha by mutableStateOf(backgroundAlpha)
+        private set
     var isDark by mutableStateOf(isDark)
         private set
 
@@ -218,6 +223,7 @@ class DevChallengeColors(
         textBody1 = other.textBody1
         textBody2 = other.textBody2
         textCaption = other.textCaption
+        backgroundAlpha = other.backgroundAlpha
         isDark = other.isDark
     }
 }

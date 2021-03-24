@@ -109,10 +109,10 @@ fun MyApp() {
                             .height(180.dp)
                     ) {
                         Chart(
-                            modifier = Modifier.background(GrayAlpha),
+                            modifier = Modifier.background(DevChallengeTheme.colors.backgroundAlpha),
                             list = translateTemperatureByTimeToChartData(createData()),
-                            lineColor = DevChallengeTheme.colors.surface,
-                            textColor = DevChallengeTheme.colors.surface,
+                            lineColor = DevChallengeTheme.colors.textBody2,
+                            textColor = DevChallengeTheme.colors.textBody1,
                             circleColor = DevChallengeTheme.colors.surface,
                         )
                     }
@@ -137,7 +137,7 @@ private fun CircleCurrentTemperatureView() {
             modifier = Modifier
                 .size(boxWidth)
                 .background(
-                    color = GrayAlpha,
+                    color = DevChallengeTheme.colors.backgroundAlpha,
                     shape = RoundedCornerShape(CornerSize(boxWidth / 2))
                 )
         ) {
@@ -149,52 +149,52 @@ private fun CircleCurrentTemperatureView() {
                         Text(
                             "41",
                             fontSize = 36.sp,
-                            color = DevChallengeTheme.colors.surface,
+                            color = DevChallengeTheme.colors.textH2,
                         )
                         Text(
                             "°",
                             fontSize = 30.sp,
-                            color = DevChallengeTheme.colors.surface,
+                            color = DevChallengeTheme.colors.textH2,
                         )
                         Text(
                             "/",
                             fontSize = 36.sp,
-                            color = DevChallengeTheme.colors.surface,
+                            color = DevChallengeTheme.colors.textH2,
                         )
                         Text(
                             "51",
                             fontSize = 36.sp,
-                            color = DevChallengeTheme.colors.surface,
+                            color = DevChallengeTheme.colors.textH2,
                         )
                         Text(
                             "°",
                             fontSize = 30.sp,
-                            color = DevChallengeTheme.colors.surface,
+                            color = DevChallengeTheme.colors.textH2,
                         )
                     }
                     Row {
                         Text(
                             "41",
                             fontSize = 80.sp,
-                            color = DevChallengeTheme.colors.surface,
+                            color = DevChallengeTheme.colors.textH1,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
                             "°",
                             fontSize = 40.sp,
-                            color = DevChallengeTheme.colors.surface,
+                            color = DevChallengeTheme.colors.textH1,
                             fontWeight = FontWeight.Bold
                         )
                     }
                     Text(
                         "2021/03/24",
                         fontSize = 24.sp,
-                        color = DevChallengeTheme.colors.surface,
+                        color = DevChallengeTheme.colors.textSubtitle1,
                     )
                     Text(
                         "6:23",
                         fontSize = 24.sp,
-                        color = DevChallengeTheme.colors.surface,
+                        color = DevChallengeTheme.colors.textSubtitle1,
                     )
                 }
             }
