@@ -1,4 +1,4 @@
-# Put title of your app here
+# Weather Forecast
 
 <!--- Replace <OWNER> with your Github Username and <REPOSITORY> with the name of your repository. -->
 <!--- You can find both of these in the url bar when you open your repository in github. -->
@@ -7,12 +7,17 @@
 
 ## :scroll: Description
 <!--- Describe your app in one or two sentences -->
-
+Wheater forecast app built using Jetpack Compose.
 
 ## :bulb: Motivation and Context
 <!--- Optionally point readers to interesting parts of your submission. -->
 <!--- What are you especially proud of? -->
+I was inspired by this app.
+https://apps.apple.com/app/id1363846787#?platform=iphone
 
+And, my goal was to draw a chart using Jetpack Compose. 
+The scrolling control of the chart was difficult for me. 
+All weather data is dummy.
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
